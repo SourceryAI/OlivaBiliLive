@@ -13,6 +13,7 @@
 
 __WebSocket 库:  [xfgryujk/blivedm](https://github.com/xfgryujk/blivedm)__
 
+__OlivaBiliLive-Plugins:  [cypress0522/OlivaBiliLive-Plugins](https://github.com/cypress0522/OlivaBiliLive-Plugins)__
 
 ### 使用 Docker 运行
 
