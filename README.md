@@ -15,16 +15,9 @@ __WebSocket 库:  [xfgryujk/blivedm](https://github.com/xfgryujk/blivedm)__
 
 __OlivaBiliLive-Plugins:  [cypress0522/OlivaBiliLive-Plugins](https://github.com/cypress0522/OlivaBiliLive-Plugins)__
 
-### 使用 Docker 运行
+### 运行
 
-此运行方式需要熟悉Docker环境
-
-1. 下载源码
-2. 使用 docker build 建置 image
-3. 使用 docker run 运行
-
-你可能需要预先扫描二维码並复制 data/session.json 以略过在 docker container 内扫描
-
+测试运行 : `OlivaBiliLive.start`
 
 ### 参考
 
