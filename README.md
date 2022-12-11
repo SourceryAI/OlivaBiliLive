@@ -1,5 +1,5 @@
 ## OlivaBiliLive
-> 原OlivaBiliLiveBot
+> 原BiliLiveBot
 
 可插件化管理的B站直播间机器人
 
