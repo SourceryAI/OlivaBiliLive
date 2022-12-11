@@ -1,7 +1,7 @@
 ## OlivaBiliLive
-> 原BiliLiveBot
-
-可插件化管理的B站直播间机器人
+> 可插件化管理的B站直播间机器人
+> 测试直播间:[基于OlivOS的B站弹幕对接机器人测试
+](https://live.bilibili.com/21752074?visit_id=5jas1suyf6k0)
 
 目前机器人可以执行
 - 发送弹幕
