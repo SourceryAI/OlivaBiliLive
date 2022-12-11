@@ -1,0 +1,33 @@
+{
+    "name": "OlivaBiliLive",
+    "author": "简律纯",
+    "namespace": "OlivaBiliLive",
+    "info": "简介:\n一个B站机器人插件，尤其作用于弹幕互动。\n\nGithub:\ncypress0522/OlivaBiliLive",
+    "priority": 30000,
+    "version": "0.2.0-alpha",
+    "svn": 15,
+    "compatible_svn": 101,
+    "message_mode": "olivos_string",
+    "support": [
+        {
+            "sdk": "onebot",
+            "platform": "qq",
+            "model": "all"
+        },
+        {
+            "sdk": "all",
+            "platform": "all",
+            "model": "all"
+        }
+    ],
+    "menu_config": [
+        {
+            "title": "关于",
+            "event": "OlivaBiliLive_Menu_About"
+        },
+        {
+            "title": "设置",
+            "event": "OlivaBiliLive_Menu_Config"
+        }
+    ]
+}
