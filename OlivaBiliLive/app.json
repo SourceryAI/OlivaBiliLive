@@ -4,7 +4,7 @@
     "namespace": "OlivaBiliLive",
     "info": "简介:\n一个B站弹幕接口插件",
     "priority": 30000,
-    "version": "0.2.3rc",
+    "version": "0.2.3rc2",
     "svn": 6,
     "compatible_svn": 101,
     "message_mode": "olivos_string",
