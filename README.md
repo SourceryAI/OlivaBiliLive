@@ -7,7 +7,7 @@
 
 ## OlivaBiliLive
 
-[![](https://img.shields.io/github/last-commit/cypress0522/OlivaBiliLive)](https://github.com/cypress0522/OlivaBiliLive/commits/main) [![](https://img.shields.io/github/workflow/status/cypress0522/OlivaBiliLive/CI)](https://github.com/cypress0522/OlivaBiliLive/actions) [![](https://img.shields.io/github/downloads/cypress0522/OlivaBiliLive/total)](https://github.com/cypress0522/OlivaBiliLive/tags) [![](https://img.shields.io/github/v/release/cypress0522/OlivaBiliLive)](https://github.com/cypress0522/OlivaBiliLive/releases)
+[![](https://img.shields.io/github/last-commit/cypress0522/OlivaBiliLive)](https://github.com/cypress0522/OlivaBiliLive/commits/main) [![](https://img.shields.io/github/workflow/status/cypress0522/OlivaBiliLive/CI)](https://github.com/cypress0522/OlivaBiliLive/actions) [![](https://img.shields.io/github/downloads/cypress0522/OlivaBiliLive/total)](https://github.com/cypress0522/OlivaBiliLive/tags) [![](https://img.shields.io/github/v/release/cypress0522/OlivaBiliLive)](https://github.com/cypress0522/OlivaBiliLive/releases) [![](https://img.shields.io/badge/QQ群聊%20交流|插件-301136495-red)](https://jq.qq.com/?_wv=1027&k=0mwUlgMY)
 
 > 可插件化管理的B站直播间机器人
 >
