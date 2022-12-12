@@ -7,6 +7,12 @@
 > 测试直播间:[基于OlivOS的B站弹幕对接机器人测试
 > ](https://live.bilibili.com/21752074?visit_id=5jas1suyf6k0)
 
+<p align="center">
+  <a href="#">
+    <img src="https://raw.githubusercontent.com/cypress0522/OlivaBiliLive/main/src/OlivaBiliLive.jpg" width="384" height="216" alt="">
+  </a>
+</p>
+
 目前机器人可以执行
 
 - 发送弹幕
