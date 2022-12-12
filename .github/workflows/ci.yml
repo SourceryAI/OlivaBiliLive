@@ -48,8 +48,8 @@ jobs:
         with:
           tag_name: v${{steps.version.outputs.value}}
           release_name: v${{steps.version.outputs.value}}
-          body: ${{steps.releasedraft.outputs.content}} # ${{steps.description.outputs.content}}
-          draft: false
+          body: ${{steps.description.outputs.content}}
+          draft: ${{steps.releasedraft.outputs.content}}
           prerelease: false
       - name: Upload Release cgo darwin
         uses: actions/upload-release-asset@v1.0.1
