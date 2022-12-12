@@ -1,16 +1,19 @@
 ## OlivaBiliLive
+
+[![](https://img.shields.io/github/last-commit/cypress0522/OlivaBiliLive)](https://github.com/cypress0522/OlivaBiliLive/commits/main) [![](https://img.shields.io/github/workflow/status/cypress0522/OlivaBiliLive/CI)](https://github.com/cypress0522/OlivaBiliLive/actions) [![](https://img.shields.io/github/downloads/cypress0522/OlivaBiliLive/total)](https://github.com/cypress0522/OlivaBiliLive/tags) [![](https://img.shields.io/github/v/release/cypress0522/OlivaBiliLive)](https://github.com/cypress0522/OlivaBiliLive/releases)
+
 > 可插件化管理的B站直播间机器人
-> 
+>
 > 测试直播间:[基于OlivOS的B站弹幕对接机器人测试
-](https://live.bilibili.com/21752074?visit_id=5jas1suyf6k0)
+> ](https://live.bilibili.com/21752074?visit_id=5jas1suyf6k0)
 
 目前机器人可以执行
+
 - 发送弹幕
 - 禁言用户 (需要房管权限)
 - 全局禁言 (需要房管权限)
 - 新增屏蔽字 (需要房管权限)
 - 删除屏蔽字 (需要房管权限)
-
 
 __WebSocket 库:  [xfgryujk/blivedm](https://github.com/xfgryujk/blivedm)__
 
