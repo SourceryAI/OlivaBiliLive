@@ -24,9 +24,31 @@ jobs:
         with:
           name: Artifacts
           path: ${{ env.PACK_NAME }}.opk
-      - name: Release
-#         if: github.ref_type == 'tag'
-        uses: softprops/action-gh-release@v1
+      - name: 读取当前版本号
+        id: version
+        uses: ashley-taylor/read-json-property-action@v1.0
         with:
-          token: ${{ secrets.GH_TOKEN }}
-          files: ${{ env.PACK_NAME }}.opk
+          path: ./OlivaBiliLive/app.json
+          property: version
+      - name: 7. 读取描述文件
+        id: description
+        uses: juliangruber/read-file-action@v1
+        with:
+          path: ./description.txt
+      - name: 9. 创建GitHub Release
+        id: create_release
+        uses: actions/create-release@latest
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tag_name: v${{steps.version.outputs.value}}
+          release_name: v${{steps.version.outputs.value}}
+          body: ${{steps.description.outputs.content}}
+          draft: false
+          prerelease: false
+#       - name: Release
+# #         if: github.ref_type == 'tag'
+#         uses: softprops/action-gh-release@v1
+#         with:
+#           token: ${{ secrets.GH_TOKEN }}
+#           files: ${{ env.PACK_NAME }}.opk
