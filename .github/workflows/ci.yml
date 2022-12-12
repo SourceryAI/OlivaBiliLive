@@ -30,12 +30,6 @@ jobs:
         with:
           path: ./OlivaBiliLive/app.json
           property: version
-      - name: 读取当前版本号svn
-        id: svn
-        uses: ashley-taylor/read-json-property-action@v1.0
-        with:
-          path: ./OlivaBiliLive/app.json
-          property: svn
       - name: Release Drafter
         id: releasedraft
         uses: toolmantim/release-drafter@v5.2.0
@@ -52,8 +46,8 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          tag_name: v${{steps.version.outputs.value}}(${{steps.svn.outputs.value}}
-          release_name: v${{steps.version.outputs.value}}(${{steps.svn.outputs.value}})
+          tag_name: v${{steps.version.outputs.value}}
+          release_name: v${{steps.version.outputs.value}}
           body: ${{steps.releasedraft.outputs.content}} # ${{steps.description.outputs.content}}
           draft: false
           prerelease: false
