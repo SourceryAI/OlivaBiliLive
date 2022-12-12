@@ -46,6 +46,8 @@ jobs:
           body: ${{steps.description.outputs.content}}
           draft: false
           prerelease: false
+          files: ${{ env.PACK_NAME }}.opk
+
 #       - name: Release
 # #         if: github.ref_type == 'tag'
 #         uses: softprops/action-gh-release@v1
