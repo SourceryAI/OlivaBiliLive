@@ -18,7 +18,7 @@ __OlivaBiliLive-Plugins:  [cypress0522/OlivaBiliLive-Plugins](https://github.com
 
 ### 运行
 
-测试运行 : `OlivaBiliLive.start`
+测试运行 : `开播`
 
 ### 参考
 
