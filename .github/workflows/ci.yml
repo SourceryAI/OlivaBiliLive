@@ -53,11 +53,5 @@ jobs:
         with:
           upload_url: ${{ steps.create_release.outputs.upload_url }} # This pulls from the CREATE RELEASE step above, referencing it's ID to get its outputs object, which include a `upload_url`. See this blog post for more info: https://jasonet.co/posts/new-features-of-github-actions/#passing-data-to-future-steps
           asset_path: ${{ env.PACK_NAME }}.opk
-          asset_name: ${{ env.PACK_NAME }}.opk
+          asset_name: ${{ env.PACK_NAME }v${{ steps.version.outputs.value }}-.opk
           asset_content_type: application/zip
-#       - name: Release
-# #         if: github.ref_type == 'tag'
-#         uses: softprops/action-gh-release@v1
-#         with:
-#           token: ${{ secrets.GH_TOKEN }}
-#           files: ${{ env.PACK_NAME }}.opk
