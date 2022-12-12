@@ -1,7 +1,7 @@
 
 <p align="center">
   <a href="#">
-    <img src="https://raw.githubusercontent.com/cypress0522/OlivaBiliLive/main/src/OlivaBiliLive-Original.jpg" width="384" height="216" alt="">
+    <img src="https://raw.githubusercontent.com/cypress0522/OlivaBiliLive/main/src/OlivaBiliLive.png" width="384" height="216" alt="">
   </a>
 </p>
 
