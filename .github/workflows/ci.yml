@@ -24,15 +24,9 @@ jobs:
         with:
           name: Artifacts
           path: ${{ env.PACK_NAME }}.opk
-#       - name: Release
-#         if: github.ref_type == 'tag'
-#         uses: softprops/action-gh-release@v1
-#         with:
-#           token: ${{ secrets.GH_TOKEN }}
-#           files: ${{ env.PACK_NAME }}.opk
-      - name: Upload to release
-        uses: JasonEtco/upload-to-release@master
+      - name: Release
+        if: github.ref_type == 'tag'
+        uses: softprops/action-gh-release@v1
         with:
-          args: ${{ env.PACK_NAME }}.opk application/zip
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          token: ${{ secrets.GH_TOKEN }}
+          files: ${{ env.PACK_NAME }}.opk
