@@ -53,5 +53,5 @@ jobs:
         with:
           upload_url: ${{ steps.create_release.outputs.upload_url }} 
           asset_path: ${{ env.PACK_NAME }}.opk
-          asset_name: ${{ steps.create_release.outputs.release_name }}.opk
+          asset_name: ${{ steps.create_release.release_name.value }}.opk
           asset_content_type: application/zip
