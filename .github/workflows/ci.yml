@@ -30,12 +30,12 @@ jobs:
         with:
           path: ./OlivaBiliLive/app.json
           property: version
-      - name: 7. 读取描述文件
+      - name: 读取描述文件
         id: description
         uses: juliangruber/read-file-action@v1
         with:
           path: ./description.txt
-      - name: 9. 创建GitHub Release
+      - name: 创建GitHub Release
         id: create_release
         uses: actions/create-release@latest
         env:
