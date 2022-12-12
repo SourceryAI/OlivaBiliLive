@@ -6,10 +6,10 @@ from aiohttp import ClientSession
 from .bilibili_api import add_badword, mute_user, remove_badword, room_slient, send_danmu, user_cookies
 from .plugin import BotPlugin, DanmakuMessage, DanmakuPosition, SuperChatMessage
 
-def logging_info(msg:str,level=2):
+def logg(msg:str,level=2):
     OlivaBiliLive.main.GlobalProc.log(level,f"[OlivaBiliLive] : {msg}")
 
-class OlivaBiliLiveBot(BLiveClient):
+class BiliLiveBot(BLiveClient):
 
     BOT_PLUGINS: List[BotPlugin] = []
 
@@ -74,20 +74,20 @@ class OlivaBiliLiveBot(BLiveClient):
     async def on_command_received(self, cmd, data):
         if self.is_bot_itself(cmd, data):
             return
-        logging_info(f'从房间 {self.room_id} 收到指令: {cmd}')
+        logg(f'从房间 {self.room_id} 收到指令: {cmd}')
         for bot_plugin in self.BOT_PLUGINS:
             try:
                 await bot_plugin.on_command_received(cmd, data)
             except Exception as e:
-                logging_info(f'执行插件 {get_type_name(bot_plugin)} 时出现错误({get_type_name(e)}): {e}')
+                logg(f'执行插件 {get_type_name(bot_plugin)} 时出现错误({get_type_name(e)}): {e}')
 
     async def _on_receive_popularity(self, popularity: int):
-        logging_info(f'从房间 {self.room_id} 收到人气值: {popularity}')
+        logg(f'从房间 {self.room_id} 收到人气值: {popularity}')
         for bot_plugin in self.BOT_PLUGINS:
             try:
                 await bot_plugin.on_receive_popularity(popularity)
             except Exception as e:
-                logging_info(f'执行插件 {get_type_name(bot_plugin)} 时出现错误({get_type_name(e)}): {e}')
+                logg(f'执行插件 {get_type_name(bot_plugin)} 时出现错误({get_type_name(e)}): {e}')
 
 
     # 其餘的自己過濾

@@ -10,7 +10,7 @@ DEFAULT_CONFIG_YML = {
     'roomid': 21752074
 }
 
-def logging_info(msg:str,level=2):
+def logg(msg:str,level=2):
     OlivaBiliLive.main.GlobalProc.log(level,f"[OlivaBiliLive] : {msg}")
     
 def make_folder(folder: str) -> bool:

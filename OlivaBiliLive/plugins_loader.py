@@ -8,7 +8,7 @@ from .file_loader import make_folder
 from importlib.machinery import SourceFileLoader
 from .plugin import BotPlugin
 
-def logging_info(msg:str,level=2):
+def logg(msg:str,level=2):
     OlivaBiliLive.main.GlobalProc.log(level,f"[OlivaBiliLive] : {msg}")
 
 PLUGINS_DIR = 'plugin/data/OlivaBiliLive/plugins'
@@ -22,11 +22,11 @@ def load_plugins():
             module = SourceFileLoader(plugin[:-3], f'{PLUGINS_DIR}/{plugin}').load_module()
             for (name, cs) in inspect.getmembers(module, inspect.isclass):
                 if cs.__base__ == BotPlugin:
-                    logging_info(f'加载插件中... {plugin} ({name})')
+                    logg(f'加载插件中... {plugin} ({name})')
                     bot_plugins.append(cs())
                     break
         except Exception as e:
-            logging_info(f'加载插件 {plugin} 时出现错误: {e}')
+            logg(f'加载插件 {plugin} 时出现错误: {e}')
             
     return bot_plugins
         

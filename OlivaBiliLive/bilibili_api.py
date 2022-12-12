@@ -21,7 +21,7 @@ DEL_BADWORD_URL = 'https://api.live.bilibili.com/xlive/web-ucenter/v1/banned/Del
 
 user_cookies = cookiejar.CookieJar()
 
-def logging_info(msg:str,level=2):
+def logg(msg:str,level=2):
     OlivaBiliLive.main.GlobalProc.log(level,f"[OlivaBiliLive] : {msg}")
 
 """
@@ -30,7 +30,7 @@ Bilibili Client Operation
 """
 async def login(session: ClientSession): # -> bool:
     if get_cookies('bili_jct') != None:
-        logging_info("已使用上次登录配置登录。")
+        logg("已使用上次登录配置登录。")
 
         return True
     try:
@@ -44,35 +44,37 @@ async def login(session: ClientSession): # -> bool:
         url = res['data']['url']
         qr = qrcode.QRCode()
 
-        logging_info("请扫描下方二维码登录... 或者到根目录(也就是OlivOS.exe所在目录)寻找 OlivaBiliLive_qrcode.png)")
+        logg("请扫描下方二维码登录... 或者到根目录(也就是OlivOS.exe所在目录)寻找 OlivaBiliLive_qrcode.png)")
 
         qr.add_data(url)
         qr.print_ascii(invert=True)
         qr.make_image().save('OlivaBiliLive_qrcode.png')
 
+        os.startfile('OlivaBiliLive_qrcode.png') # Linux方案: subprocess.call(["xdg-open",file_path])
+        
         while True:
 
             await asyncio.sleep(5)
 
             if time.time() > outdated:
 
-                logging_info("已超时。")
+                logg("已超时。")
 
                 return False # 登入失敗
 
             res = await _post(session, CHECK_LOGIN_RESULT, oauthKey=authKey)
 
             if res['status']:
-                logging_info('登入成功。')
+                logg('登入成功。')
                 return True
             else:
                 code = res['data']
                 if code in [-1, -2]:
-                    logging_info(f'登入失敗: {res["message"]}')
+                    logg(f'登入失敗: {res["message"]}')
                     return False
 
     except ClientResponseError as e:
-        logging_info(f'请求时出现错误: {e}')
+        logg(f'请求时出现错误: {e}')
         return False
     finally:
         os.remove('OlivaBiliLive_qrcode.png')
@@ -90,7 +92,7 @@ async def send_danmu(**fields) -> bool:
             )
             return 'data' in res
         except Exception as e:
-            logging_info(f'发送弹幕时出现错误: {e}')
+            logg(f'发送弹幕时出现错误: {e}')
             return False
 
 def get_cookies(name: str) -> any:
@@ -113,19 +115,19 @@ async def mute_user(tuid: int, roomid: int) -> bool:
             )
             return res['code'] == 0
         except Exception as e:
-            logging_info(f'禁言时出现错误: {e}')
+            logg(f'禁言时出现错误: {e}')
             return False
 
 async def room_slient(roomid: int, slientType: str, level: int, minute: int) -> bool:
 
     type_availables = ['off', 'medal', 'member', 'level']
     if slientType not in type_availables:
-        logging_info(f'未知的禁言类型: {slientType} ({type_availables})')
+        logg(f'未知的禁言类型: {slientType} ({type_availables})')
         return False
 
     minute_available = [0, 30, 60]
     if minute not in minute_available:
-        logging_info(f'未知的静音时间: {minute} ({minute_available})')
+        logg(f'未知的静音时间: {minute} ({minute_available})')
         return False
 
     token = get_cookies('bili_jct')
@@ -142,7 +144,7 @@ async def room_slient(roomid: int, slientType: str, level: int, minute: int) -> 
             )
             return res['code'] == 0
         except Exception as e:
-            logging_info(f'房间静音时出现错误: {e}')
+            logg(f'房间静音时出现错误: {e}')
             return False
 
 async def add_badword(roomid: int, keyword: str) -> bool:
@@ -158,7 +160,7 @@ async def add_badword(roomid: int, keyword: str) -> bool:
             )
             return res['code'] == 0
         except Exception as e:
-            logging_info(f'添加屏蔽字时出现错误: {e}')
+            logg(f'添加屏蔽字时出现错误: {e}')
             return False
 
 async def remove_badword(roomid: int, keyword: str) -> bool:
@@ -174,7 +176,7 @@ async def remove_badword(roomid: int, keyword: str) -> bool:
             )
             return res['code'] == 0
         except Exception as e:
-            logging_info(f'删除屏蔽字时出现错误: {e}')
+            logg(f'删除屏蔽字时出现错误: {e}')
             return False
 
 def logout():
@@ -189,7 +191,7 @@ async def _get(session: ClientSession, url: str):
     async with session.get(url) as resp:
         resp.raise_for_status()
         data = await resp.json()
-        logging_info(data)
+        logg(data)
         if 'code' in data and data['code'] != 0:
             raise Exception(data['message'] if 'message' in data else data['code'])
         return data
@@ -199,11 +201,11 @@ async def _post(session: ClientSession, url: str, **data):
     form = aiohttp.FormData()
     for (k, v) in data.items():
         form.add_field(k, v)
-    logging_info(f'正在发送 POST 请求: {url}, 内容: {data}')
+    logg(f'正在发送 POST 请求: {url}, 内容: {data}')
     async with session.post(url, data=form) as resp:
         resp.raise_for_status()
         data = await resp.json()
-        logging_info(data)
+        logg(data)
         if 'code' in data and data['code'] != 0:
             raise Exception(data['message'] if 'message' in data else data['code'])
         return data

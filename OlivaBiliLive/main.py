@@ -1,21 +1,23 @@
 import OlivOS
 import OlivaBiliLive
 
+import SpeakEngine
+import win32com.client
+
 import asyncio
 from genericpath import exists
 from aiohttp.client import ClientSession
 import json
-from .bilibili_bot import OlivaBiliLiveBot
+from .bilibili_bot import BiliLiveBot
 from .file_loader import load_default_config, make_folder
 from .plugins_loader import load_plugins
 from .bilibili_api import get_cookies, login, user_cookies
 from functools import wraps
 
 SESSION_DATA_PATH = 'plugin/data/OlivaBiliLive/data/session.json'
-CONNECT_ORDER = '直播间连接' # 设定连接直播间的指令
-DISCONNECT_ORDER = '直播间断连' # 设定退出直播间的指令
 
 GlobalProc = None
+speaker = None
 
 class Event(object):
     def init(plugin_event, Proc):
@@ -25,6 +27,11 @@ class Event(object):
     def private_message(plugin_event, Proc):
         reply(plugin_event, Proc)
 
+    def init_after(plugin_event, Proc):
+        global speaker
+        global dataConfig
+        speaker = win32com.client.Dispatch("SAPI.SpVoice")
+
     def group_message(plugin_event, Proc):
         reply(plugin_event, Proc)
 
@@ -32,16 +39,16 @@ class Event(object):
         pass
 
     def save(plugin_event, Proc):
-        logging_info("关闭服务ing...")
+        logg("关闭服务ing...")
 
     def menu(plugin_event, Proc):
         if plugin_event.data.namespace == 'OlivaBiliLive':  # type: ignore
             if plugin_event.data.event == 'OlivaBiliLive_Menu_Config':  # type: ignore
-                logging_info("有笨蛋打开了配置")
+                logg("有笨蛋打开了配置")
             elif plugin_event.data.event == 'OlivaBiliLive_Menu_About':  # type: ignore
-                logging_info("有笨蛋打开了关于选项框")
+                pass
 
-def logging_info(msg,level=2):
+def logg(msg,level=2):
     GlobalProc.log(level,f"[OlivaBiliLive] : {msg}")
 
 
@@ -53,13 +60,13 @@ def logging_info(msg,level=2):
 
 # # 使用装饰器
 # @decorator
-# def logging_info(msg):
+# def logg(msg):
 #     GlobalProc.log(level=2, f"[OlivaBiliLive] : {msg}")
 
 def reply(plugin_event,Proc):
-    # TODO(2022年12月11日): 房间号由`congfig.yml`入参|指令触发时入参。
-    
-    if plugin_event.data.message[:len(CONNECT_ORDER)] == CONNECT_ORDER:
+    ORDER = '开播'
+
+    if plugin_event.data.message[:len(ORDER)] == ORDER:
         make_folder('plugin/data/OlivaBiliLive/data')
         make_folder('plugin/conf/OlivaBiliLive/config')
         make_folder('plugin/data/OlivaBiliLive/plugins')
@@ -70,11 +77,8 @@ def reply(plugin_event,Proc):
 
         room = data['roomid']
 
-        OlivaBiliLiveBot.BOT_PLUGINS = load_plugins()
+        BiliLiveBot.BOT_PLUGINS = load_plugins()
         asyncio.run(start(room))
-    elif plugin_event.data.message[:len(DISCONNECT_ORDER)] == DISCONNECT_ORDER:
-        pass
-
 
 async def start(room: int):
     cookies = {}
@@ -95,25 +99,25 @@ async def start(room: int):
             jct = get_cookies('bili_jct')
 
             if uid == None or jct == None:
-                logging_info(f'获取 cookies 失败')
+                logg(f'获取 cookies 失败')
                 return
             if not session_exist:
 
                 for cookie in user_cookies:
                     cookies[cookie.key] = cookie.value
 
-                logging_info(f'已储存 cookies: {cookies}')
+                logg(f'已储存 cookies: {cookies}')
                 with open(SESSION_DATA_PATH, mode='w') as f:
                     json.dump(cookies, f)
 
-            bot = OlivaBiliLiveBot(room_id=room, uid=int(uid), session=session, loop=session._loop)
+            bot = BiliLiveBot(room_id=room, uid=int(uid), session=session, loop=session._loop)
             await bot.init_room()
-            logging_info("已启动服务~")
+            logg("已启动服务~")
             await bot.start()
             #while True:
             #    await asyncio.sleep(60)
             await bot.close()
-            logging_info('已关闭服务~')
+            logg('已关闭服务~')
         else:
             exit()
     

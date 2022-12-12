@@ -5,16 +5,20 @@ from abc import abstractmethod
 from enum import IntEnum
 from .file_loader import load_config as load_plugin_config
 
+
 def load_config(yml: str, default: dict = {}) -> any:
     return load_plugin_config(yml, default)
 
-def logging_info(msg:str,level=2):
-    OlivaBiliLive.main.GlobalProc.log(level,f"[OlivaBiliLive] : {msg}")
-    
+
+def logg(msg: str, level=2):
+    OlivaBiliLive.main.GlobalProc.log(level, f"[OlivaBiliLive] : {msg}")
+
+
 class DanmakuPosition(IntEnum):
     TOP = 5,
     BOTTOM = 4,
     NORMAL = 1
+
 
 class BotPlugin:
 
@@ -39,11 +43,11 @@ class BotPlugin:
     发送弹幕
     """
     async def send_message(self,
-                        danmaku: str, 
-                        fontsize: int = 25, 
-                        color: int = 0xffffff, 
-                        pos: DanmakuPosition = DanmakuPosition.NORMAL
-                    ) -> bool:
+                           danmaku: str,
+                           fontsize: int = 25,
+                           color: int = 0xffffff,
+                           pos: DanmakuPosition = DanmakuPosition.NORMAL
+                           ) -> bool:
         pass
 
     """
@@ -82,9 +86,12 @@ class BotPlugin:
     async def remove_badword(self, badword: str) -> bool:
         pass
 
+
 """
 WS數據物件化  (from xfgryujk)
 """
+
+
 class DanmakuMessage:
     def __init__(self, mode, font_size, color, timestamp, rnd, uid_crc32, msg_type, bubble,
                  msg,

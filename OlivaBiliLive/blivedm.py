@@ -15,7 +15,7 @@ from typing import *
 
 import aiohttp
 
-def logging_info(msg:str,level=2):
+def logg(msg:str,level=2):
     OlivaBiliLive.main.GlobalProc.log(level,f"[OlivaBiliLive] : {msg}")
 
 ROOM_INIT_URL = 'https://api.live.bilibili.com/xlive/web-room/v1/index/getInfoByRoom'
@@ -151,10 +151,10 @@ class BLiveClient:
 
     def __on_message_loop_done(self, future):
         self._future = None
-        logging_info(f'room {self.room_id} 消息协程结束')
+        logg(f'room {self.room_id} 消息协程结束')
         exception = future.exception()
         if exception is not None:
-            logging_info(f'room {self.room_id} 消息协程异常结束：{sys.exc_info(type(exception), exception, exception.__traceback__)}')
+            logg(f'room {self.room_id} 消息协程异常结束：{sys.exc_info(type(exception), exception, exception.__traceback__)}')
 
     def stop(self):
         """
@@ -189,16 +189,16 @@ class BLiveClient:
             async with self._session.get(ROOM_INIT_URL, params={'room_id': self._tmp_room_id},
                                          ssl=self._ssl) as res:
                 if res.status != 200:
-                    logging_info(f'room {self._tmp_room_id} init_room失败:{res.status, res.reason}')
+                    logg(f'room {self._tmp_room_id} init_room失败:{res.status, res.reason}')
                     return False
                 data = await res.json()
                 if data['code'] != 0:
-                    logging_info(f'room {self._tmp_room_id} init_room失败: {data["message"]}')
+                    logg(f'room {self._tmp_room_id} init_room失败: {data["message"]}')
                     return False
                 if not self._parse_room_init(data['data']):
                     return False
         except (aiohttp.ClientConnectionError, asyncio.TimeoutError):
-            logging_info(f'room {self._tmp_room_id} init_room失败:')
+            logg(f'room {self._tmp_room_id} init_room失败:')
             return False
         return True
 
@@ -214,16 +214,16 @@ class BLiveClient:
             async with self._session.get(DANMAKU_SERVER_CONF_URL, params={'id': self._room_id, 'type': 0},
                                          ssl=self._ssl) as res:
                 if res.status != 200:
-                    logging_info(f'room {self._room_id} getConf失败: {res.status , res.reason}')
+                    logg(f'room {self._room_id} getConf失败: {res.status , res.reason}')
                     return False
                 data = await res.json()
                 if data['code'] != 0:
-                    logging_info(f'room {self._room_id} getConf失败: {data["message"]}')
+                    logg(f'room {self._room_id} getConf失败: {data["message"]}')
                     return False
                 if not self._parse_danmaku_server_conf(data['data']):
                     return False
         except (aiohttp.ClientConnectionError, asyncio.TimeoutError):
-            logging_info(f'room {self._room_id} getConf失败:')
+            logg(f'room {self._room_id} getConf失败:')
             return False
         return True
 
@@ -231,7 +231,7 @@ class BLiveClient:
         self._host_server_list = data['host_list']
         self._host_server_token = data['token']
         if not self._host_server_list:
-            logging_info(f'room {self._room_id} getConf失败：host_server_list为空')
+            logg(f'room {self._room_id} getConf失败：host_server_list为空')
             return False
         return True
 
@@ -286,16 +286,16 @@ class BLiveClient:
                     async for message in websocket:  # type: aiohttp.WSMessage
                         retry_count = 0
                         if message.type != aiohttp.WSMsgType.BINARY:
-                            logging_info(f'room {self.room_id} 未知的websocket消息：type={message.type, message.data}')
+                            logg(f'room {self.room_id} 未知的websocket消息：type={message.type, message.data}')
                             continue
 
                         try:
                             await self._handle_message(message.data)
                         except asyncio.CancelledError:
-                            logging_info(f"{self.room_id} 程序被強制取消。")
+                            logg(f"{self.room_id} 程序被強制取消。")
                             raise
                         except Exception:
-                            logging_info(f'room {self.room_id} 处理消息时发生错误：')
+                            logg(f'room {self.room_id} 处理消息时发生错误：')
 
             except asyncio.CancelledError:
                 break
@@ -303,7 +303,7 @@ class BLiveClient:
                 # 重连
                 pass
             except ssl_.SSLError:
-                logging_info('SSL错误：')
+                logg('SSL错误：')
                 # 证书错误时无法重连
                 break
             finally:
@@ -313,7 +313,7 @@ class BLiveClient:
                     self._heartbeat_timer_handle = None
 
             retry_count += 1
-            logging_info(f'room {self.room_id} 掉线重连中 {retry_count}')
+            logg(f'room {self.room_id} 掉线重连中 {retry_count}')
             try:
                 await asyncio.sleep(1)
             except asyncio.CancelledError:
@@ -348,7 +348,7 @@ class BLiveClient:
                         body = json.loads(body.decode('utf-8'))
                         await self._handle_command(body)
                     except Exception:
-                        logging_info(f'body: {body}')
+                        logg(f'body: {body}')
                         raise
 
             elif header.operation == Operation.AUTH_REPLY:
@@ -356,7 +356,7 @@ class BLiveClient:
 
             else:
                 body = data[offset + HEADER_STRUCT.size: offset + header.pack_len]
-                logging_info(f'room {self.room_id,} 未知包类型：operation={header.operation, header, body}')
+                logg(f'room {self.room_id,} 未知包类型：operation={header.operation, header, body}')
 
             offset += header.pack_len
 
