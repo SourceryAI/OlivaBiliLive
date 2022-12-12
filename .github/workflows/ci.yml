@@ -25,7 +25,7 @@ jobs:
           name: Artifacts
           path: ${{ env.PACK_NAME }}.opk
       - name: Release
-        if: github.ref_type == 'tag'
+#         if: github.ref_type == 'tag'
         uses: softprops/action-gh-release@v1
         with:
           token: ${{ secrets.GH_TOKEN }}
