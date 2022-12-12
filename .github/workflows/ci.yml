@@ -48,7 +48,7 @@ jobs:
         with:
           tag_name: v${{steps.version.outputs.value}}
           release_name: v${{steps.version.outputs.value}}
-          body: ${{steps.description.outputs.content}}
+          body: ${{steps.releasedraft.outputs.content}} # ${{steps.description.outputs.content}}
           draft: ${{steps.releasedraft.outputs.content}}
           prerelease: false
       - name: Upload Release cgo darwin
