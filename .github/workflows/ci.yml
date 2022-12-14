@@ -31,7 +31,7 @@ jobs:
         id: version
         uses: ashley-taylor/read-json-property-action@v1.0
         with:
-          path: ./OlivaBiliLive/app.json
+          path: ./${{ env.PACK_NAME }}/app.json
           property: version
 
       - name: Release Drafter
