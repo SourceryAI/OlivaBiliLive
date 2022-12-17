@@ -1,14 +1,14 @@
 
 <p align="center">
   <a href="#">
-    <img src="https://raw.githubusercontent.com/cypress0522/OlivaBiliLive/main/src/OlivaBiliLive.png" width="384" height="216" alt="">
+    <img src="https://raw.githubusercontent.com/A2C29K9/OlivaBiliLive/main/src/OlivaBiliLive.png" width="384" height="216" alt="">
   </a>
 </p>
 
 ## OlivaBiliLive
 **插件基于[OlivOS](https://github.com/OlivOS-Team/OlivOS)*
 
-[![](https://img.shields.io/github/last-commit/cypress0522/OlivaBiliLive)](https://github.com/cypress0522/OlivaBiliLive/commits/main) [![](https://img.shields.io/github/workflow/status/cypress0522/OlivaBiliLive/CI)](https://github.com/cypress0522/OlivaBiliLive/actions) [![](https://img.shields.io/github/downloads/cypress0522/OlivaBiliLive/total)](https://github.com/cypress0522/OlivaBiliLive/tags) [![](https://img.shields.io/github/v/release/cypress0522/OlivaBiliLive)](https://github.com/cypress0522/OlivaBiliLive/releases) [![](https://img.shields.io/badge/QQ群聊%20交流|插件-301136495-red)](https://jq.qq.com/?_wv=1027&k=0mwUlgMY)
+[![](https://img.shields.io/github/last-commit/A2C29K9/OlivaBiliLive)](https://github.com/A2C29K9/OlivaBiliLive/commits/main) [![](https://img.shields.io/github/workflow/status/A2C29K9/OlivaBiliLive/CI)](https://github.com/A2C29K9/OlivaBiliLive/actions) [![](https://img.shields.io/github/downloads/A2C29K9/OlivaBiliLive/total)](https://github.com/A2C29K9/OlivaBiliLive/tags) [![](https://img.shields.io/github/v/release/A2C29K9/OlivaBiliLive)](https://github.com/A2C29K9/OlivaBiliLive/releases) [![](https://img.shields.io/badge/QQ群聊%20交流|插件-301136495-red)](https://jq.qq.com/?_wv=1027&k=0mwUlgMY)
 
 > 可插件化管理的B站直播间机器人
 >
@@ -17,7 +17,7 @@
 
 __WebSocket 库:  [xfgryujk/blivedm](https://github.com/xfgryujk/blivedm)__
 
-__插件市场 OlivaBiliLive-Plugins:  [cypress0522/OlivaBiliLive-Plugins](https://github.com/cypress0522/OlivaBiliLive-Plugins)__
+__插件市场 OlivaBiliLive-Plugins:  [A2C29K9/OlivaBiliLive-Plugins](https://github.com/A2C29K9/OlivaBiliLive-Plugins)__
 
 ### 运行
 
