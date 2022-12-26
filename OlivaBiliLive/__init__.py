@@ -5,4 +5,3 @@ from . import blivedm
 from . import file_loader
 from . import plugin
 from . import plugins_loader
-import .
