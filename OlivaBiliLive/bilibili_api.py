@@ -8,6 +8,7 @@ import qrcode
 import aiohttp
 import asyncio
 import time, os
+import sys
 from functools import wraps
 from qrcode.main import QRCode
 
@@ -50,7 +51,10 @@ async def login(session: ClientSession): # -> bool:
         qr.print_ascii(invert=True)
         qr.make_image().save('OlivaBiliLive_qrcode.png')
 
-        os.startfile('OlivaBiliLive_qrcode.png') # Linux方案: subprocess.call(["xdg-open",file_path])
+        if sys.platform == 'linux':
+            # subprocess.call(["xdg-open",'OlivaBiliLive_qrcode.png'])
+        else:
+            os.startfile('OlivaBiliLive_qrcode.png')
         
         while True:
 
